@@ -12,21 +12,7 @@
     <Conversationtwi v-if="activeConversation" :active-conversation="activeConversation" :name="name" />
   </div>
 </template>
-<style scoped>
-ul {
- list-style-type: none;
- padding: 0;
-}
- 
-li {
- display: inline-block;
- margin: 0 10px;
-}
- 
-a {
- color: #42b983;
-}
-</style>
+
 <script>
 import {Client as ConversationsClient} from "@twilio/conversations"
 import Conversationtwi from "../components/Conversation-twi";
@@ -42,5 +28,46 @@ export default {
             isConnected: false
         }
     },
+    methods: {
+        initConversationsClient: async function() {
+            window.conversationsClient = ConversationsClient
+            const token = await this.getToken(this.name)
+            this.conversationsClient = await ConversationsClient.create(token)
+            this.statusString = "Connecting to Twilio..."
+            this.conversationsClient.on("connectionStateChanged", (state) => {
+                switch (state) {
+                case "connected":
+                    this.statusString = "You are connected."
+                    this.isConnected = true
+                    break
+                case "disconnecting":
+                    this.statusString = "Disconnecting from Twilio..."
+                    break
+                case "disconnected":
+                    this.statusString = "Disconnected."
+                    break
+                case "denied":
+                    this.statusString = "Failed to connect."
+                    break
+                }
+            })
+        },
+    }
 }
 </script>
+
+<style scoped>
+ul {
+ list-style-type: none;
+ padding: 0;
+}
+ 
+li {
+ display: inline-block;
+ margin: 0 10px;
+}
+ 
+a {
+ color: #42b983;
+}
+</style>
