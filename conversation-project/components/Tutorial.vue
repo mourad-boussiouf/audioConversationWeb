@@ -13,6 +13,7 @@
         href="https://nuxtjs.org"
         target="_blank"
       >
+      <p>TOTO266</p>
         <svg
           width="218"
           height="45"
