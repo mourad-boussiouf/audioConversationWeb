@@ -33,7 +33,7 @@ export default {
             window.conversationsClient = ConversationsClient
             const token = await this.getToken(this.name)
             this.conversationsClient = await ConversationsClient.create(token)
-            this.statusString = "Connecting to Twilio..."
+            this.statusString = "Twilio initialisation"
             this.conversationsClient.on("connectionStateChanged", (state) => {
                 switch (state) {
                 case "connected":
@@ -51,6 +51,15 @@ export default {
                     break
                 }
             })
+        },
+        getToken: async function(identity) {
+            const response = await fetch(`http://localhost:5000/auth/user/${identity}`)
+            const responseJson = await response.json()
+            return responseJson.token
+        },
+        registerName: async function() {
+            this.nameRegistered = true
+            await this.initConversationsClient()
         },
     }
 }
