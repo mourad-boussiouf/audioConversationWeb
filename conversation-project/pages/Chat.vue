@@ -61,6 +61,26 @@ export default {
             this.nameRegistered = true
             await this.initConversationsClient()
         },
+        createConversation: async function() {
+            // verif que les deux user sont bien dans la conv client
+            try {
+                await this.conversationsClient.getUser("User1")
+                await this.conversationsClient.getUser("User2")
+            } catch {
+                console.error("Waiting for User1 and User2 client sessions")
+                return
+            }
+
+            try {
+                const newConversation = await this.conversationsClient.createConversation({uniqueName: "chat"})
+                const joinedConversation = await newConversation.join().catch(err => console.log(err))
+                await joinedConversation.add("User1").catch(err => console.log("error: ", err))
+                await joinedConversation.add("User2").catch(err => console.log("error: ", err))
+                this.activeConversation = joinedConversation
+            } catch {
+                this.activeConversation = await (this.conversationsClient.getConversationByUniqueName("chat"))
+            }
+        }
     }
 }
 </script>
