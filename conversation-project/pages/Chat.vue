@@ -3,7 +3,7 @@
     <h1>Bienvenue sur le chat<span v-if="nameRegistered">, {{ name }}</span>!</h1>
     <p>{{ statusString }}</p>
     <div v-if="!nameRegistered">
-      <input v-model="name" @keyup.enter="registerName"  placeholder="Entrez votre pseudo">
+      <input v-model="name" placeholder="Entrez votre pseudo" @keyup.enter="registerName"  >
       <button @click="registerName">S'enregistrer</button>
     </div>
     <div v-if="nameRegistered && !activeConversation && isConnected">
@@ -15,7 +15,7 @@
 
 <script>
 import {Client as ConversationsClient} from "@twilio/conversations"
-import Conversationtwi from "../components/Conversation-twi";
+import Conversationtwi from "../components/Conversation";
 
 export default {
     components: { Conversationtwi },
@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 ul {
  list-style-type: none;
  padding: 0;

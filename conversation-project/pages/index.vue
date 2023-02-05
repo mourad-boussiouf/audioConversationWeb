@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Chat from "./pages/Chat.vue"
+import Chat from "./Chat.vue"
 import "@twilio/conversations"
 export default {
     name: "App",
