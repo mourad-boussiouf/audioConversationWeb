@@ -3,22 +3,22 @@
     <h1>Bienvenue sur le chat<span v-if="nameRegistered">, {{ name }}</span>!</h1>
     <p>{{ statusString }}</p>
     <div v-if="!nameRegistered">
-      <input v-model="name" placeholder="Entrez votre pseudo" @keyup.enter="registerName"  >
+      <input v-model="name" @keyup.enter="registerName" placeholder="Entrez votre pseudo"   >
       <button @click="registerName">S'enregistrer</button>
     </div>
     <div v-if="nameRegistered && !activeConversation && isConnected">
       <button @click="createConversation">Rejoindre</button>
     </div>
-    <Conversationtwi v-if="activeConversation" :active-conversation="activeConversation" :name="name" />
+    <conversationtwi :active-conversation="activeConversation" :name="name" />
   </div>
 </template>
 
 <script>
 import {Client as ConversationsClient} from "@twilio/conversations"
-import Conversationtwi from "../components/Conversation";
+import conversationtwi from "./Conversation";
 
 export default {
-    components: { Conversationtwi },
+    components: { conversationtwi },
     data() {
         return {
             statusString: "",
@@ -31,10 +31,15 @@ export default {
     methods: {
         initConversationsClient: async function() {
             window.conversationsClient = ConversationsClient
-            const token = await this.getToken(this.name)
-            this.conversationsClient = await ConversationsClient.create(token)
+            const token = await this.getToken(this.name);
+            
+            this.conversationsClient = await new ConversationsClient(token)
             this.statusString = "Twilio initialisation"
+            console.log("WWWWWW",token);
+            console.log("WWWWWW2",this.conversationsClient);
+            
             this.conversationsClient.on("connectionStateChanged", (state) => {
+            
                 switch (state) {
                 case "connected":
                     this.statusString = "You are connected."

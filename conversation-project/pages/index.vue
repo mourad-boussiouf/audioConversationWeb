@@ -1,14 +1,14 @@
 <template>
-  <Chat />
+  <chatmultiword />
 </template>
 
 <script>
-import Chat from "./Chat.vue"
+import chatmultiword from "../components/Chat-multi.vue"
 import "@twilio/conversations"
 export default {
     name: "App",
     components: {
-        Chat
+        chatmultiword
     }
 }
 </script>
@@ -41,4 +41,3 @@ export default {
   border-radius: 4px;
   cursor: pointer;
 }
-</style>

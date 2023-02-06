@@ -13,6 +13,8 @@
     "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix"
   },
   "dependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
     "@twilio/conversations": "^2.2.1",
     "core-js": "^3.25.3",
     "cors": "^2.8.5",

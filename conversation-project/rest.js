@@ -18,6 +18,8 @@ const twilioApiSecret = process.env.TWILIO_API_KEY_SECRET
 // utilisé spécialement pour le chat conv
 const serviceSid = process.env.TWILIO_CONVERSATIONS_SERVICE_SID
 
+console.log("WWWWWWWWW",serviceSid);
+
 // le "grant" autorise cet utilisateur à aller dans ce chat précis
 // sur un appareil unique donné
 const chatGrant = new ChatGrant({
