@@ -12,3 +12,18 @@
     <Conversation v-if="activeConversation" :active-conversation="activeConversation" :name="name" />
   </div>
 </template>
+<style scoped>
+ul {
+ list-style-type: none;
+ padding: 0;
+}
+ 
+li {
+ display: inline-block;
+ margin: 0 10px;
+}
+ 
+a {
+ color: #42b983;
+}
+</style>
