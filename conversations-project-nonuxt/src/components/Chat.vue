@@ -27,3 +27,44 @@ a {
  color: #42b983;
 }
 </style>
+<script>
+import {Client as ConversationsClient} from "@twilio/conversations"
+import Conversation from "./Conversation"
+
+export default {
+    methods: {
+    initConversationsClient: async function() {
+        window.conversationsClient = ConversationsClient
+        const token = await this.getToken(this.name)
+        this.conversationsClient = await ConversationsClient.create(token)
+        this.statusString = "Connecting to Twilio..."
+        this.conversationsClient.on("connectionStateChanged", (state) => {
+            switch (state) {
+            case "connected":
+                this.statusString = "You are connected."
+                this.isConnected = true
+                break
+            case "disconnecting":
+                this.statusString = "Disconnecting from Twilio..."
+                break
+            case "disconnected":
+                this.statusString = "Disconnected."
+                break
+            case "denied":
+                this.statusString = "Failed to connect."
+                break
+            }
+        })
+    },
+    components: { Conversation },
+    data() {
+        return {
+            statusString: "",
+            activeConversation: null,
+            name: "",
+            nameRegistered: false,
+            isConnected: false
+        }
+    },
+}
+</script>
