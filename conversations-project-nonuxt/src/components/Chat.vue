@@ -56,6 +56,11 @@ export default {
             }
         })
     },
+    getToken: async function(identity) {
+    const response = await fetch(`http://localhost:5000/auth/user/${identity}`)
+    const responseJson = await response.json()
+    return responseJson.token
+},
     components: { Conversation },
     data() {
         return {
