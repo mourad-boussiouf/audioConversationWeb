@@ -84,7 +84,7 @@ export default {
         } catch {
             this.activeConversation = await (this.conversationsClient.getConversationByUniqueName("chat"))
         }
-    }
+    },
     components: { Conversation },
     data() {
         return {
