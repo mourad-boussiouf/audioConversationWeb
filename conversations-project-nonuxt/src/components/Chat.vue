@@ -10,6 +10,7 @@
       <button @click="createConversation">Join chat</button>
     </div>
     <Conversation v-if="activeConversation" :active-conversation="activeConversation" :name="name" />
+     <Conversation :active-conversation="activeConversation" :name="name" />
   </div>
 </template>
 <style scoped>
@@ -95,5 +96,14 @@ export default {
             isConnected: false
         }
     },
+    mounted() {
+    this.activeConversation.getMessages()
+        .then((newMessages) => {
+            this.messages = [...this.messages, ...newMessages.items]
+        })
+    this.activeConversation.on("messageAdded", (message) => {
+        this.messages = [...this.messages, message]
+    })
+},
 }
 </script>
