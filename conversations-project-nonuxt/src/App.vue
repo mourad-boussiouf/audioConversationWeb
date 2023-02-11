@@ -1,14 +1,14 @@
 <template>
-  <Chat />
+  <chat_word />
 </template>
 
 <script>
-import Chat from "./components/Chat.vue"
+import chat_word from "./components/chat_word.vue"
 import "@twilio/conversations"
 export default {
     name: "App",
     components: {
-        Chat
+        chat_word
     }
 }
 </script>
