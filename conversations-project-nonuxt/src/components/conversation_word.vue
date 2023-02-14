@@ -76,7 +76,7 @@ export default {
 .name {
   padding-right: 8px;
 	font-size: 11px;
-}
+} 
 ::-webkit-scrollbar {
   width: 10px;
 }
