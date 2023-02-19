@@ -37,6 +37,9 @@ build/Release
 
 # Dependency directories
 node_modules/
+audioconference/node_modules/
+audiovideo-vuejs/node_modules/
+
 jspm_packages/
 
 # TypeScript v1 declaration files

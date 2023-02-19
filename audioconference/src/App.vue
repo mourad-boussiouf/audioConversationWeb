@@ -1,10 +1,11 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <TwilioConference />
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import TwilioConference from './components/TwilioConference.vue'
 
 export default {
   name: 'App',
