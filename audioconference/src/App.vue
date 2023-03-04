@@ -10,7 +10,8 @@ import TwilioConference from './components/TwilioConference.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    TwilioConference
   }
 }
 </script>
